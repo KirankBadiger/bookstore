@@ -34,7 +34,22 @@ app.post('/submit-book', function (req, res) {
     res.send(bookName + ' Added successfully to the database');
 });
 
-
+app.get('/get-book', function(req, res) {
+    var received;
+    con.query('SELECT * FROM books', (err,rows) => {
+        if(err) throw err;
+      
+        console.log('Data received from Db:');
+        console.log(rows);
+        rows = received;
+      });
+      res.send(`
+              <tr>
+                <th scope="row">${received.book_id}</th>
+                <td>${received.book_name}</td>
+                <td>${received.book_author}</td>
+              </tr>`);
+});
 
 app.listen(5000);
 
